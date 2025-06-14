@@ -77,6 +77,53 @@ var fahrenheitDegree: Double = (celciusDegree * 9 / 5) + 32
 
 print("\(celciusDegree)° Celcius is equal to \(fahrenheitDegree)° Fahrenheit.")
 
+var numbers : [Int] = [1,2,3,4,5]
+
+numbers.append(6)
+
+numbers = numbers.reversed()
+
+print(type(of: Array(numbers.reversed())))
+
+print(numbers)
+
+numbers = numbers.sorted()
+
+print(numbers)
+
+numbers.removeAll()
+
+print(numbers)
+
+//Dictionary
+
+var employe : [String:String] = [
+    "Name" : "Ilham",
+    "Location" : "Jakarta",
+    "Position" : "Software Engineer"
+]
+
+print("Name: \(employe["Name"] ?? "Not Found")")
+print("Location: \(employe["Location"] ?? "Not Found")")
+print("Position: \(employe["Position"] ?? "Not Found")")
+
+var setExample : Set<String> = ["a","b","c","a"]
+
+print(setExample)
+
+enum Weekday {
+    case monday
+    case tuesday
+    case wednesday
+    case thursday
+    case friday
+}
+
+var today : Weekday = .monday
+
+
+
+
 
 
 
