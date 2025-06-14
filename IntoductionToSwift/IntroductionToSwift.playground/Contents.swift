@@ -121,6 +121,35 @@ enum Weekday {
 
 var today : Weekday = .monday
 
+let surname: String = "Wisnu"
+var skor: Double = 88
+
+var authenticated: Bool = true
+
+var albums: [String] = ["Red", "Fearless", "1989", "1989"]
+
+var user: [String:String] = ["id":"@ilhmwisnu"]
+
+var books: Set<String> = Set(["The Bluest Eye", "Foundation", "Girl, Woman, Other"])
+
+var teams : [String] = []
+
+var clues = [String]()
+
+var albumsSet = Set(albums)
+
+print(albums.count)
+print(albumsSet.count)
+
+
+
+
+
+
+
+
+
+
 
 
 
