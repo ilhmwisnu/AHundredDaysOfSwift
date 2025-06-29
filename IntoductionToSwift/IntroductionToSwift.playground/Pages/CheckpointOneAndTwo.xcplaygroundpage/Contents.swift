@@ -122,6 +122,13 @@ enum Weekday {
 var today : Weekday = .monday
 
 let surname: String = "Wisnu"
+
+let asd : String
+
+asd = "asd"
+
+print(asd)
+
 var skor: Double = 88
 
 var authenticated: Bool = true
@@ -140,6 +147,7 @@ var albumsSet = Set(albums)
 
 print(albums.count)
 print(albumsSet.count)
+
 
 
 
