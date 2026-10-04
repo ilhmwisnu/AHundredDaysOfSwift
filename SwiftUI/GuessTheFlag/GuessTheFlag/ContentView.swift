@@ -8,33 +8,98 @@
 import SwiftUI
 
 struct ContentView: View {
-    
-    @State private var isAlertShow = false
-    
+
+    private static let flagCount = 3
+    private static let pointsPerCorrectAnswer = 10
+
+    @State private var countries = [
+        "Estonia", "France", "Germany", "Ireland", "Italy", "Monaco", "Nigeria",
+        "Poland", "Spain", "UK", "Ukraine", "US",
+    ].shuffled()
+    @State private var correctAnswerIndex = Int.random(in: 0..<flagCount)
+    @State private var showingAlert = false
+    @State private var alertTitle = ""
+    @State private var alertMessage = ""
+    @State private var score = 0
+
     var body: some View {
         ZStack {
-            Color.red.opacity(0.2)
+            Color.blue
+                .overlay(
+                    LinearGradient(
+                        colors: [.black.opacity(0.01), .black.opacity(0.8)],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                )
+                .ignoresSafeArea()
+
             VStack {
-                HStack(spacing: 0) {
-                    Color.blue
-                    Color.red
+                Text("Guess the Flag")
+                    .font(.largeTitle)
+                    .bold()
+                VStack(spacing: 24) {
+                    VStack(spacing: 4) {
+                        Text("Pick the right flag")
+                        Text(countries[correctAnswerIndex])
+                            .font(.title)
+                            .bold()
+                    }
+
+                    VStack(spacing: 16) {
+                        ForEach(0..<Self.flagCount, id: \.self) { i in
+                            Button {
+                                onFlagTap(index: i)
+                            } label: {
+                                Image(countries[i])
+                                    .renderingMode(.original)
+                                    .clipShape(.rect(cornerRadius: 16))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .stroke(.black)
+                                    )
+                            }
+                            .accessibilityLabel(countries[i])
+                        }
+                    }
                 }
-                .frame(maxHeight: 200)
-                .padding(.bottom, 24)
-                
-                Button("Tap me!") {
-                    isAlertShow = true
-                }
-                .buttonStyle(.glass)
+                .frame(maxWidth: .infinity)
+                .padding(24)
+                .background(.ultraThinMaterial)
+                .clipShape(.rect(cornerRadius: 16))
+                .padding()
+
+                Text("Score: \(score)")
+                    .font(.title2)
+                    .foregroundStyle(.white)
+                    .bold()
             }
         }
-        .ignoresSafeArea()
-        .alert("Woi!", isPresented: $isAlertShow) {
-            Button("OK") {}
-            Button("Cancel") {}
+        .alert(alertTitle, isPresented: $showingAlert) {
+            Button("OK") {
+                shuffle()
+            }
         } message: {
-            Text("HI")
+            Text(alertMessage)
         }
+    }
+
+    func onFlagTap(index: Int) {
+        if index == correctAnswerIndex {
+            alertTitle = "Correct"
+            alertMessage = "You got \(Self.pointsPerCorrectAnswer) points"
+            score += Self.pointsPerCorrectAnswer
+        } else {
+            alertTitle = "Wrong"
+            alertMessage = "Let's try again"
+        }
+
+        showingAlert = true
+    }
+
+    func shuffle() {
+        countries.shuffle()
+        correctAnswerIndex = Int.random(in: 0..<Self.flagCount)
     }
 }
 
