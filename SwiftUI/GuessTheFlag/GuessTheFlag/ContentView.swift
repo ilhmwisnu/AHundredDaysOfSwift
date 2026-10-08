@@ -35,9 +35,6 @@ struct ContentView: View {
                 .ignoresSafeArea()
 
             VStack {
-                Text("Guess the Flag")
-                    .font(.largeTitle)
-                    .bold()
                 VStack(spacing: 24) {
                     VStack(spacing: 4) {
                         Text("Pick the right flag")
@@ -48,18 +45,9 @@ struct ContentView: View {
 
                     VStack(spacing: 16) {
                         ForEach(0..<Self.flagCount, id: \.self) { i in
-                            Button {
+                            FlagChoice(country: countries[i]) {
                                 onFlagTap(index: i)
-                            } label: {
-                                Image(countries[i])
-                                    .renderingMode(.original)
-                                    .clipShape(.rect(cornerRadius: 16))
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 16)
-                                            .stroke(.black)
-                                    )
                             }
-                            .accessibilityLabel(countries[i])
                         }
                     }
                 }
@@ -74,6 +62,7 @@ struct ContentView: View {
                     .foregroundStyle(.white)
                     .bold()
             }
+            .pageTitle("Guess The Flag")
         }
         .alert(alertTitle, isPresented: $showingAlert) {
             Button("OK") {
@@ -103,6 +92,48 @@ struct ContentView: View {
     }
 }
 
+struct FlagChoice: View {
+
+    var country: String
+    var onTap: () -> Void
+
+    var body: some View {
+        Button(action: onTap) {
+            Image(country)
+                .renderingMode(.original)
+                .clipShape(.rect(cornerRadius: 16))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(.black)
+                )
+        }
+        .accessibilityLabel(country)
+    }
+}
+
+extension View {
+    func pageTitle(_ title : String) -> some View {
+        modifier(PageTitle(title: title))
+    }
+}
+
+struct PageTitle: ViewModifier {
+    
+    var title : String
+    
+    func body(content: Content) -> some View {
+        VStack {
+            Text(title)
+                .font(.title)
+                .foregroundStyle(.white)
+                .bold()
+            content
+        }
+    }
+}
+
 #Preview {
     ContentView()
 }
+
+
