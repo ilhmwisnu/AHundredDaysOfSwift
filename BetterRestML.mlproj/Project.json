@@ -1,0 +1,29 @@
+{
+  "activityEntities" : [
+    "projectCreated",
+    [
+      {
+        "createdDate" : "2026-10-13T13:38:55Z",
+        "event" : "projectCreated",
+        "id" : "4FC25CB8-F9B6-440C-A2AF-EB59ED6780B0",
+        "subtitle" : "BetterRestML",
+        "title" : "Project Created"
+      }
+    ]
+  ],
+  "authorName" : "Ilham Wisnu",
+  "createdDate" : "2026-10-13T13:38:55Z",
+  "description" : "",
+  "id" : "6BE427DC-64A7-4E81-9DFD-63295355B557",
+  "license" : "",
+  "location" : "",
+  "modifiedDate" : "2026-10-13T13:38:55Z",
+  "projectName" : "BetterRestML",
+  "settingsEntity" : {
+    "snapshotOnExtendTraining" : true,
+    "snapshotOnResumeTraining" : false
+  },
+  "taskType" : "generalRegresor",
+  "title" : "Tabular Regression",
+  "version" : "1.1"
+}
